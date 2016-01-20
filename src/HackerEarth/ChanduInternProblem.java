@@ -1,5 +1,4 @@
 package HackerEarth;
-
 import java.util.Scanner;
 
 public class ChanduInternProblem {
