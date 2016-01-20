@@ -15,7 +15,6 @@ public class XsquareAndDoubleStrings {
 				System.out.println("NO");
 			}
 		}
-
 	}
 
 	private static boolean isPossibleToMakeDoubleString(String str) {
@@ -26,14 +25,4 @@ public class XsquareAndDoubleStrings {
 		}
 		return false;
 	}
-
-	private static void isDouble(String str) {
-		if (str.length() % 2 == 0) {
-			if (str.substring(0, str.length() / 2).equals(
-					str.substring(str.length() / 2, str.length()))) {
-				System.out.println("Yes");
-			}
-		}
-	}
-
 }
