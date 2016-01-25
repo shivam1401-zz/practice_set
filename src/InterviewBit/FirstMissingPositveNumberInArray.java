@@ -5,18 +5,15 @@ import java.util.Collections;
 public class FirstMissingPositveNumberInArray {
 
 	public static void main(String[] aa) {
-		 //int A[] ={ 417, 929, 845, 462, 675, 175, 73, 867, 14};
-		 int B[] = {1,2,3,4,5,6};
-		
+		 int B[] = {2,3,6,1,4,5};
 		 ArrayList<Integer> a = new ArrayList<Integer>();
 		
 		 for (int i = 0; i < B.length; i++) {
 			a.add(B[i]);
 		 }
 		 
-		 int result = new FirstMissingPositveNumberInArray().firstMissingPositive2(a);
+		 int result = new FirstMissingPositveNumberInArray().firstMissingPositive_AcceptableSolution(a);
 		 System.out.println(result);
-
 	}
 
 	public int firstMissingPositive(ArrayList<Integer> a) {
@@ -46,54 +43,39 @@ public class FirstMissingPositveNumberInArray {
 		return a.get(a.size()-1) + 1;
 	}
 	
-	public int firstMissingPositive2(ArrayList<Integer> A) {
+	public int firstMissingPositive_AcceptableSolution(ArrayList<Integer> A) {
+		int count = A.size()-1;
 		int n = A.size() + 1;
-	    int count;
-	    int idx = 0;
-	    int size = A.size();
-	    count = size - 1;
-	    
-	    for (idx = size - 1; idx >= 0; idx--) {
-	        
-	        int num = A.get(idx);
-	        
-	        if (num < 0) {
-	            int val = A.get(count);
-	            A.set(idx, val);
-	            A.set(count, num);
-	            count--;
-	        }
-	        
-	    }
-	    System.out.println(A);
-	    
-	    for (idx = 0; idx <= count; idx++) {
-	        
-	    	int num = A.get(idx);
-	        
-            num = Math.abs(num);
-	        
-	        if (num > 0 && num < n) {
-	            
-	            int index = num - 1;
-	            int val = A.get(index);
-	            A.set(index, -val);
-	            
-	        }
-	        
-	    }
-	    System.out.println(A);
-	    for (idx = 0; idx <= count; idx++) {
-	        
-	        int num = A.get(idx);
-	        
-	        if (num > 0) {
-	            return idx + 1;
-	        }
-	        
-	    }
-	    
-	    return idx + 1;
-	    
+		int index = 0;
+		
+		//setting all negative numbers at end in array.
+		for(int i = A.size()-1; i>=0 ; i--){
+			int num = A.get(i);
+			if(num < 0){
+				int tmp = A.get(count);
+				A.set(i, tmp);
+				A.set(count,num);
+				count--;
+			}
+		}
+		//Iterating through only positive number 
+		//and if numbers are in range then at every value'th index making that number negative.
+		for(index=0; index<=count; index++){
+			int num = A.get(index);
+			num = Math.abs(num);
+			if(num>0 && num<n){
+				int temp = num - 1;
+				int value = A.get(temp);
+				A.set(temp, -value);
+			}
+		}
+		
+		for(index=0;index<=count;index++){
+			int temp = A.get(index);
+			if(temp>0){
+				return index+1;
+			}
+		}
+		return index+1;
 	}
 }
